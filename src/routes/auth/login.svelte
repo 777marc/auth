@@ -1,4 +1,21 @@
-<script></script>
+<script>
+	import { post, browserSet } from '$lib/req_utils';
+
+	let email = '';
+	let password = '';
+
+	async function login() {
+		const res = await post(fetch, 'http://localhost:3001/api/users/signin', {
+			email,
+			password
+		});
+
+		if (res.ok) {
+			let data = await res.json();
+			browserSet('jwt', data.token);
+		}
+	}
+</script>
 
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
 	<div class="mb-4">
@@ -8,6 +25,7 @@
 			id="username"
 			type="text"
 			placeholder="Username"
+			bind:value={email}
 		/>
 	</div>
 	<div class="mb-6">
@@ -17,16 +35,21 @@
 			id="password"
 			type="password"
 			placeholder="******************"
+			bind:value={password}
 		/>
 		<p class="text-red text-xs italic">Please choose a password.</p>
 	</div>
 	<div class="flex items-center justify-between">
-		<button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="button">
+		<button
+			on:click={login}
+			class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+			type="button"
+		>
 			Sign In
 		</button>
 		<a
 			class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
-			href="#"
+			href="/auth/forgotpassword"
 		>
 			Forgot Password?
 		</a>
