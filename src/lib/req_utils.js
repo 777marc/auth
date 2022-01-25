@@ -1,6 +1,6 @@
 import { browser } from '$app/env';
 
-function browserGet(key) {
+export function browserGet(key) {
 	if (browser) {
 		const item = localStorage.getItem(key);
 		if (item) {
