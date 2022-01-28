@@ -23,13 +23,6 @@ export async function post(fetch, url, body) {
 		headers['Content-Type'] = 'application/json';
 		body = JSON.stringify(body);
 
-		console.log('body:', body, headers);
-
-		// const token = browserGet('jwt');
-		// if (token) {
-		// 	headers['Authorization'] = `Bearer ${token}`;
-		// }
-
 		const res = await fetch(url, {
 			method: 'POST',
 			body,

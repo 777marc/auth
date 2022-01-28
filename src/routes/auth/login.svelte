@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	import { post, browserSet } from '$lib/req_utils';
 
 	let email = '';
@@ -13,6 +15,7 @@
 		if (res.ok) {
 			let data = await res.json();
 			browserSet('jwt', data.token);
+			goto('/dashboard');
 		}
 	}
 </script>

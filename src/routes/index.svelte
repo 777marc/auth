@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 
 	let data = [];
@@ -14,6 +15,8 @@
 		if (res.ok) {
 			data = await res.json();
 			name = data.currentUser.name;
+		} else {
+			goto('/auth/login');
 		}
 	});
 </script>
